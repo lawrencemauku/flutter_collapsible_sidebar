@@ -26,8 +26,7 @@ class SidebarPage extends StatefulWidget {
 class _SidebarPageState extends State<SidebarPage> {
   List<CollapsibleItem> _items;
   String _headline;
-  AssetImage _avatarImg =
-      AssetImage('assets/man.png');
+  AssetImage _avatarImg = AssetImage('assets/man.png');
 
   @override
   void initState() {
@@ -102,18 +101,21 @@ class _SidebarPageState extends State<SidebarPage> {
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: CollapsibleSidebar(
-        isCollapsed: true,
+        isCollapsed: false,
         items: _items,
+        borderRadius: 0,
         avatarImg: _avatarImg,
         title: 'John Smith',
+        screenPadding: 0,
         onTitleTap: () {
           ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Yay! Flutter Collapsible Sidebar!')));
+              SnackBar(content: Text('Yay! \nFlutter Collapsible Sidebar!')));
         },
         body: _body(size, context),
-        backgroundColor: Colors.black,
-        selectedTextColor: Colors.limeAccent,
-        textStyle: TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
+        backgroundColor: Colors.cyan,
+        selectedTextColor: Colors.white,
+        unselectedTextColor: Colors.black,
+        textStyle: TextStyle(fontSize: 15, fontStyle: FontStyle.normal),
         titleStyle: TextStyle(
             fontSize: 20,
             fontStyle: FontStyle.italic,
@@ -121,15 +123,9 @@ class _SidebarPageState extends State<SidebarPage> {
         toggleTitleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         sidebarBoxShadow: [
           BoxShadow(
-            color: Colors.indigo,
-            blurRadius: 20,
-            spreadRadius: 0.01,
-            offset: Offset(3, 3),
-          ),
-          BoxShadow(
-            color: Colors.green,
-            blurRadius: 50,
-            spreadRadius: 0.01,
+            color: Colors.grey.withOpacity(0.3),
+            blurRadius: 4,
+            spreadRadius: 1,
             offset: Offset(3, 3),
           ),
         ],
@@ -141,21 +137,14 @@ class _SidebarPageState extends State<SidebarPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Colors.blueGrey[50],
+      // color: Colors.white,
       child: Center(
-        child: Transform.rotate(
-          angle: math.pi / 2,
-          child: Transform.translate(
-            offset: Offset(-size.height * 0.3, -size.width * 0.23),
-            child: Text(
-              _headline,
-              style: Theme.of(context).textTheme.headline1,
-              overflow: TextOverflow.visible,
-              softWrap: false,
-            ),
-          ),
-        ),
-      ),
+          child: Text(
+        _headline,
+        style: TextStyle(color: Colors.black, fontSize: 40),
+        overflow: TextOverflow.visible,
+        softWrap: false,
+      )),
     );
   }
 }
